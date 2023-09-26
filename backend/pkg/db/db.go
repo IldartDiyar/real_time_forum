@@ -1,12 +1,13 @@
 package db
 
 import (
+	"backend/pkg/config"
 	"database/sql"
 	"os"
 )
 
-func OpenDB(driver string, dsn string, path string) (*sql.DB, error) {
-	db, err := sql.Open(driver, dsn)
+func InitDB(cfg config.Database, path string) (*sql.DB, error) {
+	db, err := sql.Open(cfg.Driver, cfg.Dsn)
 	if err != nil {
 		return nil, err
 	}

@@ -23,18 +23,18 @@ type Server struct {
 	MaxHeaderMegabytes int    `json:"maxheadermegabytes"`
 }
 
-func Init(path string) (*Config, error) {
+func Init(path string) (Config, error) {
+	var config Config
+
 	data, err := os.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return config, err
 	}
-
-	var config Config
 
 	if err = json.Unmarshal(data, &config); err != nil {
 		fmt.Println(err, "error")
-		return nil, err
+		return config, err
 	}
 
-	return &config, nil
+	return config, nil
 }
